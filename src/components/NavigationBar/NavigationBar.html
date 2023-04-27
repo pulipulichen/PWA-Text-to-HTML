@@ -1,0 +1,45 @@
+
+<div class="NavigationBar">
+  <div class="ui top fixed menu"
+    :class="computedNavigationBarClasses">
+    <div class="item favicon"
+      :title="computedTitle">
+      <img src="./favicon.png"
+        v-show="!computedFavicon" />
+      <img :src="computedFavicon"
+        v-show="computedFavicon" />
+    </div>
+    <ItemAddTodo 
+      ref="ItemAddTodo"
+      :db="db">
+    </ItemAddTodo>
+    <div class="right menu">
+      <ItemFileUpload 
+        class="item-file-upload"
+        ref="ItemFileUpload"
+        :db="db">
+      </ItemFileUpload>
+      <template v-if="!db.config.showConfiguration">
+        <a class="item view-toggle"
+          :class="{disabled: !hasTodoTasks}"
+          @click="db.config.view = 'todo'"
+          v-show="db.config.view === 'completed'">
+          <img src="./list-todo.png" />
+        </a>
+        <a class="item view-toggle"
+          :class="{disabled: !hasCompletedTasks}"
+          @click="db.config.view = 'completed'"
+          v-show="db.config.view === 'todo'">
+          <img src="./list-complated.png" />
+        </a>
+      </template>
+      <a class="item"
+        :class="{actvie: db.config.showConfiguration}"
+        @click="db.config.showConfiguration = !db.config.showConfiguration">
+        <i class="icon"
+          :class="{cog: !db.config.showConfiguration, x: db.config.showConfiguration}"></i>
+      </a>
+    </div>
+  </div>
+  <div class="menu-padding"></div>
+</div>
