@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "bash ./docker-compose/d3.webpack-watch-build-production.sh",
+    "start-build": "bash ./docker-compose/d3.webpack-watch-build-production-docker-rebuild.sh",
     "w1.webpack-build-development": "webpack --mode development --config ./webpack/webpack.config.js ",
     "w2.webpack-watch-development": "webpack --watch --mode development --display errors-only --config ./webpack/webpack.config.js ",
     "w3.webpack-watch-build-production": "webpack --watch --mode production --display errors-only --config ./webpack/webpack.config.js ",
@@ -85,6 +86,8 @@
     "xmlhttprequest": "1.8.0",
     "browser-file-storage": "1.0.7",
     "xlsx": "0.16.9",
-    "mime-types": "2.1.35"
+    "mime-types": "2.1.35",
+    "linkifyjs": "4.1.1",
+    "linkify-html": "4.1.1"
   }
 }

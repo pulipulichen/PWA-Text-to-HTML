@@ -4,6 +4,7 @@ let Index = {
   props: ['db', 'view', 'search'],
   components: {
     NavigationBar: () => import(/* webpackChunkName: "components/NavigationBar" */ './NavigationBar/NavigationBar.vue'),
+    Converter: () => import(/* webpackChunkName: "components/Converter" */ './Converter/Converter.vue'),
   },
   data() {
     this.$i18n.locale = this.db.config.localConfig

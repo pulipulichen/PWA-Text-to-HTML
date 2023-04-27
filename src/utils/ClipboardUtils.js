@@ -33,4 +33,14 @@ export default {
 
     document.body.removeChild(textArea);
   },
+  copyRichText(str) {
+    let listener = function (e) {
+      e.clipboardData.setData("text/html", str);
+      e.clipboardData.setData("text/plain", str);
+      e.preventDefault();
+    }
+    document.addEventListener("copy", listener);
+    document.execCommand("copy");
+    document.removeEventListener("copy", listener);
+  }
 }
