@@ -26,29 +26,12 @@ let app = {
       let output = []
 
       for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim()
+        let paragraph = this.parseParagraph(lines[i])
+        paragraph = this.parseInline(paragraph)
 
-        if (line.startsWith('----')) {
-          output.push('<hr />')
-          continue
+        if (paragraph) {
+          output.push(paragraph)
         }
-        else if (line.startsWith('# ')) {
-          output.push(`<p><strong>` + linkifyHtml(line, {
-            target: "_blank",
-          }) + `</strong></p>`)
-          continue
-        }
-        else if (line === '') {
-          output.push('<p>&nbsp;</p>')
-          continue
-        }
-        else {
-          output.push(`<p>` + linkifyHtml(line, {
-            target: "_blank",
-          }) + `</p>`)
-          continue
-        }
-
       }
 
       return output.join('\n')
@@ -60,6 +43,52 @@ let app = {
   methods: {
     copy () {
       this.db.utils.ClipboardUtils.copyRichText(this.contentHTML)
+    },
+    parseParagraph (line) {
+      line = line.trim()
+
+      if (line.startsWith('----')) {
+        return '<hr />'
+      }
+      else if (line.startsWith('# ')) {
+        return `<p><strong>` + linkifyHtml(line, {
+          target: "_blank",
+        }) + `</strong></p>`
+      }
+      else if (line === '') {
+        return '<p>&nbsp;</p>'
+      }
+      else {
+        return `<p>` + linkifyHtml(line, {
+          target: "_blank",
+        }) + `</p>`
+      }
+    },
+    parseInline (paragraph) {
+      
+      if (paragraph.split('**').length > 2) {
+        let parts = paragraph.split('**')
+
+        let output = []
+        for (let i = 0; i < parts.length; i++) {
+          let part = parts[i]
+          if (i === 0) {
+            output.push(part)
+            continue
+          }
+
+          if (i % 2 === 1) {
+            output.push(`<strong style="color:red">`)
+          }
+          else {
+            output.push(`</strong>`)
+          }
+          output.push(part)
+        }
+        paragraph = output.join('')
+      }
+
+      return paragraph
     }
   }
 }
