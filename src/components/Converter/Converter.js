@@ -58,6 +58,9 @@ let app = {
       else if (line === '') {
         return '<p>&nbsp;</p>'
       }
+      else if (line.startsWith('https://blogger.googleusercontent.com/img/a/')) {
+        return `<p><a href="${line}" target="_blank"><img src="${line}" style="border:1px solid #ccc;max-width: calc(100% - 1rem); height: auto" /></a></p>`
+      }
       else {
         return `<p>` + linkifyHtml(line, {
           target: "_blank",
