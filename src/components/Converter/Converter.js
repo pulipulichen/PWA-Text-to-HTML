@@ -19,7 +19,14 @@ let app = {
   computed: {
     contentHTML () {
       let content = this.db.localConfig.content
+      
       content = content.trim()
+      if (content.startsWith('"') && content.endsWith('"')) {
+        content = content.slice(1, -1).trim()
+      }
+      if (content.startsWith("'") && content.endsWith("'")) {
+        content = content.slice(1, -1).trim()
+      }
 
       // content = `<p>` + content + `</p>`
       let lines = content.split('\n')
