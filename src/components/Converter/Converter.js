@@ -51,8 +51,12 @@ let app = {
     copy () {
       this.db.utils.ClipboardUtils.copyRichText(this.contentHTML)
     },
+    escapeHTML(html) {
+      return html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    },
     parseParagraph (line) {
       line = line.trim()
+      line = this.escapeHTML(line)
 
       if (line.startsWith('----')) {
         return '<hr />'
