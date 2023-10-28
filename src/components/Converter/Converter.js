@@ -61,6 +61,13 @@ let app = {
       if (line.startsWith('----')) {
         return '<hr />'
       }
+      else if (line === '[加油]') {
+        return `<br /><p style="text-align: center; font-size: 3rem;">\\ 加油 /</p>
+        <p style="text-align: center;"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEjF68RhCHmEdS6xVm_EwsR8Wh-CXVUOdLE5u7sgP-MkVi5dnTcZZG0Uzku1r5WosD8ODY0cqIyddUtQGVtEXALAvgpUA1ftIJ9LQ3lv6tgpjQwBTX41TwLFvbH80Qz8td8ekcsvLJvmveS6EPazfIsvUQcIfqW7FhXe_T8pMIrPwoEmnzkO6YTP1A">
+            <br>
+        </p>
+        `
+      }
       else if (line.startsWith('# ')) {
         return `<p><strong>` + linkifyHtml(line, {
           target: "_blank",
